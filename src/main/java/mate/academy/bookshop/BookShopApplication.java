@@ -1,5 +1,6 @@
 package mate.academy.bookshop;
 
+import java.math.BigDecimal;
 import mate.academy.bookshop.model.Book;
 import mate.academy.bookshop.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import java.math.BigDecimal;
 
 @SpringBootApplication
 public class BookShopApplication {
@@ -18,6 +18,7 @@ public class BookShopApplication {
         SpringApplication.run(BookShopApplication.class, args);
 
     }
+
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {

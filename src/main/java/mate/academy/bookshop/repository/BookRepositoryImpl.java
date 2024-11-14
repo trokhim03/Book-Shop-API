@@ -1,5 +1,6 @@
 package mate.academy.bookshop.repository;
 
+import java.util.List;
 import mate.academy.bookshop.model.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,7 +8,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.List;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
