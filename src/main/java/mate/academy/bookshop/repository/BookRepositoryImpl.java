@@ -20,10 +20,8 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book save(Book book) {
-        Session session = null;
         Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.save(book);
             transaction.commit();
@@ -33,15 +31,11 @@ public class BookRepositoryImpl implements BookRepository {
                 transaction.rollback();
             }
             throw new RuntimeException("Can't insert book into DB : " + book, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 
     @Override
-    public List findAll() {
+    public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
             JpaCriteriaQuery<Book> query = session.getCriteriaBuilder()
                     .createQuery(Book.class);
