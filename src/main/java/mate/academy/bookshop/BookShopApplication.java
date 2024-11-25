@@ -16,7 +16,6 @@ public class BookShopApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BookShopApplication.class, args);
-
     }
 
     @Bean
@@ -24,6 +23,8 @@ public class BookShopApplication {
         return args -> {
             Book book = new Book();
             book.setTitle("Harry Potter");
+            book.setAuthor("Taras");
+            book.setIsbn("12345678");
             book.setPrice(BigDecimal.valueOf(999));
 
             bookService.save(book);
