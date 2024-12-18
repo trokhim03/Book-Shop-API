@@ -6,7 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import mate.academy.bookshop.exceptions.DatabaseOperationException;
+import mate.academy.bookshop.exceptions.DataProcessingException;
 import mate.academy.bookshop.model.Book;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +28,7 @@ public class BookRepositoryImpl implements BookRepository {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new DatabaseOperationException("Can't insert book into DB : " + book, e);
+            throw new DataProcessingException("Can't insert book into DB : " + book, e);
         }
     }
 
@@ -36,6 +36,9 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> findAll() {
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
+        } catch (Exception e) {
+            throw new DataProcessingException("Unable to retrieve all books"
+                    + " from the db", e);
         }
     }
 
@@ -44,6 +47,10 @@ public class BookRepositoryImpl implements BookRepository {
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             Book book = entityManager.find(Book.class, id);
             return Optional.ofNullable(book);
+        } catch (Exception e) {
+            throw new DataProcessingException("Unable to retrieve the book"
+                    + " from the db with ID: " + id, e);
+
         }
     }
 }
