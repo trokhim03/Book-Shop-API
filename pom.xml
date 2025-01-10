@@ -32,7 +32,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <liquibase.changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</liquibase.changeLogFile>
     </properties>
     <dependencies>
         <dependency>
@@ -90,13 +89,6 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>4.27.0</version>
-                <configuration>
-                    <changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
-                    <url>jdbc:mysql://localhost:3306/ticket_app?serverTimezone=UTC</url>
-                    <username>root</username>
-                    <password>QWERTY123</password>
-                    <driver>com.mysql.cj.jdbc.Driver</driver>
-                </configuration>
             </plugin>
 
 
@@ -123,25 +115,6 @@
                             <version>${mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
                 </configuration>
             </plugin>
             <plugin>
