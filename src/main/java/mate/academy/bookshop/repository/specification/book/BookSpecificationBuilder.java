@@ -3,6 +3,8 @@ package mate.academy.bookshop.repository.specification.book;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookshop.dto.BookSearchParameters;
 import mate.academy.bookshop.model.Book;
+import mate.academy.bookshop.repository.book.AuthorSpecificationProvider;
+import mate.academy.bookshop.repository.book.TitleSpecificationProvider;
 import mate.academy.bookshop.repository.specification.SpecificationBuilder;
 import mate.academy.bookshop.repository.specification.SpecificationProviderManager;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,12 +21,13 @@ public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
         if (bookSearchParameters.author() != null && bookSearchParameters.author().length > 0) {
             specification = specification
                     .and(specificationProviderManager
-                            .getSpecificationProvider("author")
+                            .getSpecificationProvider(AuthorSpecificationProvider.AUTHOR_FIELD)
                             .getSpecification(bookSearchParameters.author()));
         }
         if (bookSearchParameters.title() != null && bookSearchParameters.title().length > 0) {
             specification = specification
-                    .and(specificationProviderManager.getSpecificationProvider("title")
+                    .and(specificationProviderManager
+                            .getSpecificationProvider(TitleSpecificationProvider.TITLE_FIELD)
                     .getSpecification(bookSearchParameters.title()));
         }
 
