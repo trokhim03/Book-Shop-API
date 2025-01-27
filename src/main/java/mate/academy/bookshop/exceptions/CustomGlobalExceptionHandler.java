@@ -27,23 +27,19 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("time", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST);
         List<String> errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(this::getErrorMassage)
                 .toList();
         body.put("errors", errors);
-        return new ResponseEntity<>(body, headers, status);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     private String getErrorMassage(ObjectError e) {
         if (e instanceof FieldError fieldError) {
-            String field = fieldError.getField();
-            String message = fieldError.getDefaultMessage();
-            return field + " " + message;
+            return fieldError.getField() + " " + fieldError.getDefaultMessage();
         }
         return e.getDefaultMessage();
     }
 }
-
