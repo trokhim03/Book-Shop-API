@@ -15,23 +15,23 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: email
-                  type: varchar(255)
+                  type: varchar(320)
                   constraints:
                     nullable: false
                     unique: true
               - column:
                   name: password
-                  type: varchar(255)
+                  type: varchar(64)
                   constraints:
                     nullable: false
               - column:
                   name: first_name
-                  type: varchar(255)
+                  type: varchar(50)
                   constraints:
                     nullable: false
               - column:
                   name: last_name
-                  type: varchar(255)
+                  type: varchar(50)
                   constraints:
                     nullable: false
               - column:
