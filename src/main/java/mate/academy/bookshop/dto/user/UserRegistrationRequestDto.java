@@ -11,16 +11,18 @@ import mate.academy.bookshop.validation.FieldMatch;
 public class UserRegistrationRequestDto {
     @Email
     @NotBlank
+    @Size(max = 320,
+            message = "Email cannot be longer than 320 characters")
     private String email;
 
     @NotBlank
-    @Size(min = 8, max = 35,
-            message = "Password must be between 8 and 35 characters")
+    @Size(min = 8, max = 64,
+            message = "Password must be between 8 and 64 characters")
     private String password;
 
     @NotBlank
-    @Size(min = 8, max = 35,
-            message = "Repeat password must be between 8 and 35 characters")
+    @Size(min = 8, max = 64,
+            message = "Repeat password must be between 8 and 64 characters")
     private String repeatPassword;
 
     @NotBlank
@@ -33,7 +35,7 @@ public class UserRegistrationRequestDto {
             message = "Last name must be between 2 and 50 characters")
     private String lastName;
 
-    @Size(min = 5, max = 100,
-            message = "Shipping address must be between 5 and 100 characters")
+    @Size(min = 5, max = 255,
+            message = "Shipping address must be between 5 and 255 characters")
     private String shippingAddress;
 }

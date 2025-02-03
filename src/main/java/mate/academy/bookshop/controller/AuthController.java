@@ -1,5 +1,7 @@
 package mate.academy.bookshop.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookshop.dto.user.UserRegistrationRequestDto;
@@ -14,10 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication",
+        description = "Operations related to user authentication and registration")
 public class AuthController {
     private final UserService userService;
 
     @PostMapping ("/registration")
+    @Operation(summary = "User Registration",
+            description = "Registers a new user with the provided registration details.")
     public UserResponseDto registration(@RequestBody @Valid UserRegistrationRequestDto requestDto)
             throws RegistrationException {
         return userService.register(requestDto);

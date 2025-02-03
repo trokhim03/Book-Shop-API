@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: update-email-length
+      author: trokhim
+      changes:
+        - modifyDataType:
+            tableName: users
+            columnName: email
+            newDataType: varchar(320)
+
+  - changeSet:
+            id: update-password-length
+            author: trokhim
+            changes:
+              - modifyDataType:
+                  tableName: users
+                  columnName: password
+                  newDataType: varchar(512)
+
