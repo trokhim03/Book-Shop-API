@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-admin
+      author: trokhim
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "admin@gmail.com"
+              - column:
+                  name: password
+                  value: $2a$10$8yOak5DRsmBf09CRjVyagOUKFZlgSLhwg1tRoTqXeJosFFX2NRneC
+              - column:
+                  name: first_name
+                  value: Admin
+              - column:
+                  name: last_name
+                  value: Admin
+  - changeSet:
+      id: create-user-user
+      author: trokhim
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "user@gmail.com"
+              - column:
+                  name: password
+                  value: $2a$10$8yOak5DRsmBf09CRjVyagOUKFZlgSLhwg1tRoTqXeJosFFX2NRneC
+              - column:
+                  name: first_name
+                  value: User
+              - column:
+                  name: last_name
+                  value: User
+
