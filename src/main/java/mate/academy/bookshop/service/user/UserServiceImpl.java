@@ -39,10 +39,4 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return userMapper.toUserResponse(user);
     }
-
-    @Transactional
-    @Override
-    public void deleteById(Long userId) {
-        userRepository.deleteById(userId);
-    }
 }

@@ -8,5 +8,4 @@ public interface UserService {
     UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
             throws RegistrationException;
 
-    void deleteById(Long id);
 }

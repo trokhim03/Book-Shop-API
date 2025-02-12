@@ -10,7 +10,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @EntityGraph(attributePaths = "roles")
     Optional<User> findByEmail(String email);
-
-    @EntityGraph(attributePaths = "roles")
-    void deleteById(Long id);
 }
