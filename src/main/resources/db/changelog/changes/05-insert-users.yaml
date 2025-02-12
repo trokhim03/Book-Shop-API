@@ -11,7 +11,7 @@ databaseChangeLog:
                   value: "admin@gmail.com"
               - column:
                   name: password
-                  value: $2a$10$8yOak5DRsmBf09CRjVyagOUKFZlgSLhwg1tRoTqXeJosFFX2NRneC
+                  value: $2a$10$hP3prmAIecHnoRz857vTdu3qeFCEG59GRuRX4HIMQlmz7IPXY327.
               - column:
                   name: first_name
                   value: Admin
@@ -30,7 +30,7 @@ databaseChangeLog:
                   value: "user@gmail.com"
               - column:
                   name: password
-                  value: $2a$10$8yOak5DRsmBf09CRjVyagOUKFZlgSLhwg1tRoTqXeJosFFX2NRneC
+                  value: $2a$10$hP3prmAIecHnoRz857vTdu3qeFCEG59GRuRX4HIMQlmz7IPXY327.
               - column:
                   name: first_name
                   value: User

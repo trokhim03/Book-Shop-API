@@ -32,6 +32,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <liquibase.url>jdbc:mysql://localhost:3306/book_shop?serverTimeZone=UTC</liquibase.url>
+        <liquibase.username>root</liquibase.username>
+        <liquibase.password>QWERTY123</liquibase.password>
+        <liquibase.changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</liquibase.changeLogFile>
     </properties>
     <dependencies>
         <dependency>

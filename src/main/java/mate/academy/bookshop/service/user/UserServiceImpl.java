@@ -1,13 +1,12 @@
 package mate.academy.bookshop.service.user;
 
 import jakarta.transaction.Transactional;
-import java.util.Optional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookshop.dto.user.UserRegistrationRequestDto;
 import mate.academy.bookshop.dto.user.UserResponseDto;
+import mate.academy.bookshop.exceptions.EntityNotFoundException;
 import mate.academy.bookshop.exceptions.RegistrationException;
-import mate.academy.bookshop.exceptions.RoleNotFoundException;
 import mate.academy.bookshop.mapper.UserMapper;
 import mate.academy.bookshop.model.Role;
 import mate.academy.bookshop.model.User;
@@ -25,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
+    @Transactional
     public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
             throws RegistrationException {
         if (userRepository.existsByEmail(userRegistrationRequestDto.getEmail())) {
@@ -34,22 +34,15 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userRegistrationRequestDto.getPassword()));
 
         Role defaultRole = roleRepository.findByName(Role.RoleName.ROLE_USER)
-                .orElseThrow(() -> new RoleNotFoundException("Default role not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Default role not found"));
         user.setRoles(Set.of(defaultRole));
         userRepository.save(user);
         return userMapper.toUserResponse(user);
     }
 
     @Transactional
-    public void assignRole(String email, Role.RoleName roleName) {
-        Optional<User> byEmail = userRepository.findByEmail(email);
-        Optional<Role> byName = roleRepository.findByName(roleName);
-
-        if (byEmail.isPresent() && byName.isPresent()) {
-            User user = byEmail.get();
-            user.getRoles().add(byName.get());
-            userRepository.save(user);
-        }
-
+    @Override
+    public void deleteById(Long userId) {
+        userRepository.deleteById(userId);
     }
 }

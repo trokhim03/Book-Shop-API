@@ -1,15 +1,15 @@
 databaseChangeLog:
   - changeSet:
-      id: create-user-roles-table
+      id: create-users-roles-table
       author: trokhim
       preConditions:
         - onFail: MARK_RAN
         - not:
             tableExists:
-              tableName: user_roles
+              tableName: users_roles
       changes:
         - createTable:
-            tableName: user_roles
+            tableName: users_roles
             columns:
               - column:
                   name: user_id
@@ -22,14 +22,14 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:
-            baseTableName: user_roles
+            baseTableName: users_roles
             baseColumnNames: user_id
             constraintName: fk_user_roles_user_id
             referencedTableName: users
             referencedColumnNames: id
             onDelete: CASCADE
         - addForeignKeyConstraint:
-            baseTableName: user_roles
+            baseTableName: users_roles
             baseColumnNames: role_id
             constraintName: fk_user_roles_role_id
             referencedTableName: roles

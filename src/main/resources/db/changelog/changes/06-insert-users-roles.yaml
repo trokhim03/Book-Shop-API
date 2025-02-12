@@ -1,23 +1,23 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-user-roles
+      id: insert-users-roles
       author: trokhim
       changes:
         - insert:
-            tableName: user_roles
+            tableName: users_roles
             columns:
               - column:
                   name: user_id
                   value: 1
               - column:
                   name: role_id
-                  value: 1
+                  value: 2
         - insert:
-            tableName: user_roles
+            tableName: users_roles
             columns:
               - column:
                   name: user_id
                   value: 2
               - column:
                   name: role_id
-                  value: 2
+                  value: 1
