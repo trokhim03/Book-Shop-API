@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-is-deleted-column
+      author: trokhim 
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: is_deleted
+                  type: boolean
+                  defaultValue: false

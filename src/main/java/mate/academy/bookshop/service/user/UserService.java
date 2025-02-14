@@ -7,4 +7,5 @@ import mate.academy.bookshop.exceptions.RegistrationException;
 public interface UserService {
     UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
             throws RegistrationException;
+
 }
