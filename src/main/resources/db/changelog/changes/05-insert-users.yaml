@@ -37,4 +37,3 @@ databaseChangeLog:
               - column:
                   name: last_name
                   value: User
-
