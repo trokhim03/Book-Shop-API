@@ -63,6 +63,7 @@ public class BookController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @Operation(summary = "Update Book by ID",
             description = "Update an existing book's details by ID")

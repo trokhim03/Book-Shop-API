@@ -1,9 +1,11 @@
 package mate.academy.bookshop.dto.book;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.Data;
 import org.hibernate.validator.constraints.ISBN;
 import org.hibernate.validator.constraints.URL;
@@ -37,4 +39,7 @@ public class CreateBookRequestDto {
     @NotNull
     @URL(protocol = "https", message = "Cover image URL must use HTTPS.")
     private String coverImage;
+
+    @NotEmpty
+    private List<Long> categories;
 }
