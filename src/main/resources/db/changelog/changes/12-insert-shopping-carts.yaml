@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-shopping-carts
+      author: trokhim
+      changes:
+        - insert:
+            tableName: shopping_carts
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: is_deleted
+                  value: 0
+        - insert:
+            tableName: shopping_carts
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: is_deleted
+                  value: 0

@@ -1,6 +1,7 @@
 package mate.academy.bookshop.mapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import mate.academy.bookshop.config.MapperConfig;
@@ -13,6 +14,7 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(config = MapperConfig.class)
@@ -46,5 +48,12 @@ public interface BookMapper {
         return categoriesIds.stream()
                 .map(Category::new)
                 .collect(Collectors.toSet());
+    }
+
+    @Named("bookById")
+    default Book bookById(Long id) {
+        return Optional.ofNullable(id)
+                .map(Book::new)
+                .orElse(null);
     }
 }

@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cart-items-table
+      author: trokhim
+      changes:
+        - createTable:
+            tableName: cart_items
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cart_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_item_shopping_cart
+                    referencedTableName: shopping_carts
+                    referencedColumnNames: user_id
+                    nullable: false
+                    deleteCascade: true
+              - column:
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_items_book
+                    referencedTableName: books
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: int

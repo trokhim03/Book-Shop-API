@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-shopping-carts-table
+      author: trokhim
+      changes:
+        - createTable:
+            tableName: shopping_carts
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    foreignKeyName: fk_shopping_cart_user
+                    referencedTableName: users
+                    referencedColumnNames: id
+                    nullable: false
+                    deleteCascade: true
+              - column:
+                  name: is_deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
