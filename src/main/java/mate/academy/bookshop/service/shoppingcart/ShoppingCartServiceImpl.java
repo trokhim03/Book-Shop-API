@@ -17,6 +17,7 @@ import mate.academy.bookshop.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
@@ -38,7 +39,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    @Transactional
     public ShoppingCartResponseDto addCartItem(CartItemRequestDto cartItemUpdateDto, Long userId) {
         ShoppingCart shoppingCartByUserId = getShoppingCartByUserId(userId);
 
@@ -64,7 +64,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    @Transactional
     public ShoppingCartResponseDto updateCartItems(Long userId,
                                                    Long cartItemId,
                                                    CartItemUpdateDto updateDto) {
@@ -80,7 +79,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    @Transactional
     public void deleteCartItemFromCart(Long userId, Long cartItemId) {
         ShoppingCart shoppingCartByUserId = getShoppingCartByUserId(userId);
 

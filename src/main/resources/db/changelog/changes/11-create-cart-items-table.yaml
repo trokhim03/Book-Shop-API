@@ -19,8 +19,9 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_item_shopping_cart
                     referencedTableName: shopping_carts
-                    referencedColumnNames: id
+                    referencedColumnNames: user_id
                     nullable: false
+                    deleteCascade: true
               - column:
                   name: book_id
                   type: bigint

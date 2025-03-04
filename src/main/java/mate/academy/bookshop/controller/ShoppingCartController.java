@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.bookshop.dto.cartitem.CartItemRequestDto;
 import mate.academy.bookshop.dto.cartitem.CartItemUpdateDto;
 import mate.academy.bookshop.dto.shoppingcart.ShoppingCartResponseDto;
-import mate.academy.bookshop.exceptions.EntityNotFoundException;
 import mate.academy.bookshop.model.User;
 import mate.academy.bookshop.service.shoppingcart.ShoppingCartService;
 import org.springframework.http.HttpStatus;
@@ -76,10 +75,6 @@ public class ShoppingCartController {
     }
 
     private Long getAuthenticatedUserId(Authentication authentication) {
-        if (authentication == null || !(authentication.getPrincipal() instanceof User)) {
-            throw new EntityNotFoundException("Authentication failed. User not found.");
-        }
         return ((User) authentication.getPrincipal()).getId();
     }
-
 }
