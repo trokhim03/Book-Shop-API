@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
     List<OrderItem> findAllByOrder(Order order);
 
-    Optional<OrderItem> findByIdAndOrderId(Long orderItemId, Long orderId);
-
+    Optional<OrderItem> findByIdAndOrderIdAndOrderUserId(Long orderItemId,
+                                                         Long orderId,
+                                                         Long userId);
 }

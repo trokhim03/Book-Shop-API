@@ -16,5 +16,5 @@ public interface OrderItemMapper {
     OrderItemResponseDto toDto(OrderItem orderItem);
 
     @IterableMapping(qualifiedByName = "orderItemToDto")
-    List<OrderItemResponseDto> toDto(List<OrderItem> orderItems);
+    List<OrderItemResponseDto> toOrderItemDtoList(List<OrderItem> orderItems);
 }

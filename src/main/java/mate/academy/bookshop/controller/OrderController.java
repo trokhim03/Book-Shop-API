@@ -11,6 +11,7 @@ import mate.academy.bookshop.dto.order.OrderUpdateStatusDto;
 import mate.academy.bookshop.dto.orderitem.OrderItemResponseDto;
 import mate.academy.bookshop.model.User;
 import mate.academy.bookshop.service.order.OrderService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +32,9 @@ public class OrderController {
     @Operation(summary = "Get all orders for the authenticated user",
             description = "Retrieves a list of orders for the currently authenticated user.")
     @GetMapping
-    public List<OrderResponseDto> getOrders(Authentication authentication) {
-        return orderService.getOrderByUser((User) authentication.getPrincipal());
+    public List<OrderResponseDto> getOrders(Pageable pageable, Authentication authentication) {
+        Long authenticatedUserId = getAuthenticatedUserId(authentication);
+        return orderService.getOrderByUserId(pageable, authenticatedUserId);
     }
 
     @Operation(summary = "Create a new order",
@@ -40,7 +42,8 @@ public class OrderController {
     @PostMapping
     public OrderResponseDto createOrder(Authentication authentication,
                                         @RequestBody @Valid OrderRequestDto orderRequestDto) {
-        return orderService.createOrderByUser((User) authentication.getPrincipal(),
+        Long authenticatedUserId = getAuthenticatedUserId(authentication);
+        return orderService.createOrderByUserId(authenticatedUserId,
                 orderRequestDto);
     }
 
@@ -61,8 +64,8 @@ public class OrderController {
     @GetMapping("/{orderId}/items")
     public List<OrderItemResponseDto> getOrderItems(@PathVariable Long orderId,
                                                     Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        return orderService.getOrderItemsByOrderId(orderId, user.getId());
+        Long authenticatedUserId = getAuthenticatedUserId(authentication);
+        return orderService.getOrderItemsByOrderId(orderId, authenticatedUserId);
     }
 
     @Operation(summary = "Get a specific item from an order",
@@ -70,7 +73,13 @@ public class OrderController {
                     + "by itemId, within the order identified by orderId.")
     @GetMapping("/{orderId}/items/{itemId}")
     public OrderItemResponseDto getOrderItem(@PathVariable Long orderId,
-                                             @PathVariable Long itemId) {
-        return orderService.getOrderItemFromOrderById(orderId, itemId);
+                                             @PathVariable Long itemId,
+                                             Authentication authentication) {
+        Long authenticatedUserId = getAuthenticatedUserId(authentication);
+        return orderService.getOrderItemFromOrderById(orderId, itemId, authenticatedUserId);
+    }
+
+    private Long getAuthenticatedUserId(Authentication authentication) {
+        return ((User) authentication.getPrincipal()).getId();
     }
 }
