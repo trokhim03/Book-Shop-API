@@ -19,10 +19,10 @@ import mate.academy.bookshop.model.CartItem;
 import mate.academy.bookshop.model.Order;
 import mate.academy.bookshop.model.OrderItem;
 import mate.academy.bookshop.model.ShoppingCart;
+import mate.academy.bookshop.model.User;
 import mate.academy.bookshop.repository.OrderItemRepository;
 import mate.academy.bookshop.repository.OrderRepository;
 import mate.academy.bookshop.repository.ShoppingCartRepository;
-import mate.academy.bookshop.repository.UserRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -35,23 +35,20 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final ShoppingCartRepository shoppingCartRepository;
-    private final UserRepository userRepository;
 
     @Override
-    public OrderResponseDto createOrderByUserId(Long userId, OrderRequestDto orderRequestDto) {
+    public OrderResponseDto createOrderByUser(User user, OrderRequestDto orderRequestDto) {
         ShoppingCart shoppingCart = shoppingCartRepository
-                .findByUserId(userId)
+                .findByUserId(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Shopping cart not found"
-                        + " for user with id: " + userId
+                        + " for user with id: " + user.getId()
                 ));
         if (shoppingCart.getCartItems().isEmpty()) {
             throw new OrderProcessingException("Shopping cart is empty "
-                    + "for user id: " + userId);
+                    + "for user id: " + user.getId());
         }
         Order order = orderMapper.toEntity(orderRequestDto);
-        order.setUser(userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User with id "
-                        + userId + " not found")));
+        order.setUser(user);
         order.setStatus(Order.Status.PENDING);
         order.setOrderDate(LocalDateTime.now());
 

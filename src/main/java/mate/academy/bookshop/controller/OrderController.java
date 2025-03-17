@@ -42,8 +42,8 @@ public class OrderController {
     @PostMapping
     public OrderResponseDto createOrder(Authentication authentication,
                                         @RequestBody @Valid OrderRequestDto orderRequestDto) {
-        Long authenticatedUserId = getAuthenticatedUserId(authentication);
-        return orderService.createOrderByUserId(authenticatedUserId,
+
+        return orderService.createOrderByUser((User) authentication.getPrincipal(),
                 orderRequestDto);
     }
 
