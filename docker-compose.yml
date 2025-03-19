@@ -33,7 +33,7 @@ services:
       SPRING_DATASOURCE_USERNAME: "${MYSQLDB_USER}"
       SPRING_DATASOURCE_PASSWORD: "${MYSQLDB_PASSWORD}"
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "org.hibernate.dialect.MySQL8Dialect"
-      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:${DEBUG_PORT}"
     depends_on:
       mysqldb:
         condition: service_healthy
