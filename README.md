@@ -80,9 +80,6 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.show-sql=true
 
-# Application settings
-server.servlet.context-path=/api
-
 # JWT Configuration
 jwt.expiration=<TIME_SESSION_EXPIRATION_IN_MS>
 jwt.secret=<SECRET_WORD>
