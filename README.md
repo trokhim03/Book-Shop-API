@@ -46,11 +46,11 @@ The project provides a comprehensive set of features for managing users, books, 
 
 There are two ways to launch a project:
 
-- **Local run** (without Docker) - for those who want to work with their own database.
+- **Local run** - for those who want to work with their own database.
 
-- **Docker** (recommended) - automatic deployment of all components.
+- **Launching via Docker** (recommended) - automatic deployment of all components.
 
-## 💻 Local launch
+## 💻 Local run
 1️⃣ **Clone the Repository**
 
   First, clone the repository to your local machine:
