@@ -42,31 +42,17 @@ The project provides a comprehensive set of features for managing users, books, 
 ## 📊 Database Schema
 <img width="1160" alt="Знімок екрана 2025-03-25 о 10 24 08" src="https://github.com/user-attachments/assets/73040165-6630-4867-a227-0807edb2843f" />
 
-## 🖇️ Working with the .env File
+## 🛠️ Setting up a project
 
-For secure management of sensitive settings, the application utilizes environment variables stored in a .env file. Create this file in your project root with the following configuration parameters:
+There are two ways to launch a project:
 
-**Example .env File**
-```ini
-# MySQL root user credentials (for initialization only)
-MYSQLDB_ROOT_PASSWORD= ******** # Replace with strong password
+- **Local run** (without Docker) - for those who want to work with their own database.
 
-# Application database settings
-MYSQLDB_DATABASE=book_shop          # Database name
-MYSQLDB_USER=bookshop_user          # Application database username
-MYSQLDB_PASSWORD= ******** # Application database password
+- **Docker** (recommended) - automatic deployment of all components.
 
-# Network ports configuration
-MYSQLDB_LOCAL_PORT=5434             # MySQL port mapping for local development
-SPRING_LOCAL_PORT=8088              # Spring application port for local development
-SPRING_DOCKER_PORT=8080             # Spring application port in container
-
-# Remote debugging port (for IDE integration)
-DEBUG_PORT=5005                     # Java debug port
-```
-## 🛠️ Setup & Installation
+## 💻 Local launch
 1️⃣ **Clone the Repository**
-  
+
   First, clone the repository to your local machine:
   
   ```bash
@@ -78,18 +64,9 @@ DEBUG_PORT=5005                     # Java debug port
   ```bash
   mvn clean package
   ```
-3️⃣ **Start the Application with Docker**
+3️⃣ **Edit application.properties**
 
-  Run the following command to start the application using Docker Compose:
-  
-  ```bash
-  docker-compose up -d
-  ```
-  > The `-d` flag runs the containers in detached mode.
-
-## 🗄 Connecting to a Custom Database
-
-If you want to use a custom MySQL database, update the application.properties file with your database credentials:
+Configure your database connection and application settings by editing the ``` src/main/resources/application.properties ``` file.
 
 **Example application.properties File**
 
@@ -108,6 +85,45 @@ spring.jpa.show-sql=true
 jwt.expiration=<TIME_SESSION_EXPIRATION_IN_MS>
 jwt.secret=<SECRET_WORD>
 ```
+4️⃣ **Start the Application**
+
+Run the Spring Boot application:
+```
+mvn spring-boot:run
+```
+
+The application will be available at http://localhost:8080 (default port)
+
+## 🐳 Launching via Docker
+
+If you want Docker to automatically deploy the database and application:
+
+1️⃣ **Create an .env file in the project root with the following variables:**
+
+```ini
+# MySQL root user credentials (for initialization only)
+MYSQLDB_ROOT_PASSWORD= ******** # Replace with strong password
+
+# Application database settings
+MYSQLDB_DATABASE=book_shop          # Database name
+MYSQLDB_USER=bookshop_user          # Application database username
+MYSQLDB_PASSWORD= ******** # Application database password
+
+# Network ports configuration
+MYSQLDB_LOCAL_PORT=5434             # MySQL port mapping for local development
+SPRING_LOCAL_PORT=8088              # Spring application port for local development
+SPRING_DOCKER_PORT=8080             # Spring application port in container
+
+# Remote debugging port (for IDE integration)
+DEBUG_PORT=5005                     # Java debug port
+```
+
+2️⃣ **Start the containers:**
+```bash
+docker-compose up -d
+```
+
+The application will then be available at http://localhost:8088
 
 ## 📖 API Documentation
 
