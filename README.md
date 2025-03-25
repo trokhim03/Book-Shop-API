@@ -2,14 +2,14 @@
 This API is designed to manage an online bookstore, offering features such as book catalog management, shopping carts, order processing, user registration, JWT authentication, and role-based access control for users and administrators. It is an ideal solution for individuals or businesses looking to create an efficient and scalable online bookstore with streamlined order and inventory management.
 ## 📌 Technologies & Tools
 - **Core Language**: Java 17
-- **Framework**: Spring Boot (with Spring Web, Spring Data JPA, Spring Security)
-- **Database**: MySQL (with Liquibase for schema migrations)
-- **Testing**: JUnit, MockMvc
+- **Framework**: Spring Boot 3.3.3 (with Spring Web, Spring Data JPA, Spring Security)
+- **Database**: MySQL 8.0.33 (with Liquibase for schema migrations)
+- **Testing**: JUnit 5, MockMvc
 - **API Documentation**: Swagger
 - **API Testing**: Postman
 - **Dependency Management**: Maven
 - **Containerization**: Docker, Docker Compose
-- **Object Mapping**: MapStruct
+- **Object Mapping**: MapStruct 1.5.5.Final 
 ## ⚡ Functionality
 The project provides a comprehensive set of features for managing users, books, categories, orders, and the shopping cart. Below is a breakdown of the main functionalities:
 
@@ -40,8 +40,30 @@ The project provides a comprehensive set of features for managing users, books, 
 - Removing books from the cart.
 - Viewing the current cart status before checkout.
 ## 📊 Database Schema
-<img width="932" alt="Знімок екрана 2025-03-24 о 10 58 37" src="https://github.com/user-attachments/assets/e4b9e552-9860-4378-acef-86cb51a1946f" />
+<img width="1160" alt="Знімок екрана 2025-03-25 о 10 24 08" src="https://github.com/user-attachments/assets/73040165-6630-4867-a227-0807edb2843f" />
 
+## 🖇️ Working with the .env File
+
+For secure management of sensitive settings, the application utilizes environment variables stored in a .env file. Create this file in your project root with the following configuration parameters:
+
+**Example .env File**
+```ini
+# MySQL root user credentials (for initialization only)
+MYSQLDB_ROOT_PASSWORD= ******** # Replace with strong password
+
+# Application database settings
+MYSQLDB_DATABASE=book_shop          # Database name
+MYSQLDB_USER=bookshop_user          # Application database username
+MYSQLDB_PASSWORD= ******** # Application database password
+
+# Network ports configuration
+MYSQLDB_LOCAL_PORT=5434             # MySQL port mapping for local development
+SPRING_LOCAL_PORT=8088              # Spring application port for local development
+SPRING_DOCKER_PORT=8080             # Spring application port in container
+
+# Remote debugging port (for IDE integration)
+DEBUG_PORT=5005                     # Java debug port
+```
 ## 🛠️ Setup & Installation
 1️⃣ **Clone the Repository**
   
@@ -68,6 +90,8 @@ The project provides a comprehensive set of features for managing users, books, 
 ## 🗄 Connecting to a Custom Database
 
 If you want to use a custom MySQL database, update the application.properties file with your database credentials:
+
+**Example application.properties File**
 
 ``` properties
 # Database Configuration
